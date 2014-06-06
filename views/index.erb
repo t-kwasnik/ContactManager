@@ -1,7 +1,31 @@
 <h1>Contacts</h1>
 
+<form method="get" action="/" name = "search">
+  <label for="where">Search Contacts</label>
+  <input type="text" name="where" id = "where"/>
+  <input type="hidden" name = "page" value="<%=@page%>">
+</form>
+
 <ul>
   <% @contacts.each do |contact| %>
-    <li><%= contact.name %> - <%= contact.phone_number %></li>
+    <li><a href = "/contacts/<%= contact.id%>"><%= contact.name %> - <%= contact.phone_number %></a></li>
   <% end %>
 </ul>
+
+<a href = "/?<%="where=#{@where}&" if @where != ""%>page=<%= @page - 1 %>">Back</a>
+<a href = "/?<%="where=#{@where}&" if @where != ""%>page=<%= @page + 1 %>">Next</a>
+&nbsp;&nbsp;&nbsp;<span style ="font-size:8pt">(Limit 2 Per Page)</span>
+
+
+<br><br><br>
+<span style ="font-size:14pt"> Add Contact </span>
+<form method="post" action="/submit" name = "new contact form">
+  <label for="first">First Name</label>
+  <input type="text" name="first" id = "where"/>
+  <label for="last">Last Name</label>
+  <input type="text" name="last" id = "where"/>
+  <label for="number">Phone Number</label>
+  <input type="text" name="number" id = "where"/>
+  <input type="submit" value = "Submit"/>
+</form>
+
